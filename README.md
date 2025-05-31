@@ -1,6 +1,4 @@
 # Shell Implementation
- - 
-
 - common.sh file will containe **shared functions**
 - each microservice has its own shell script (like `user.sh`, `cart.sh`, etc.) that **sources** this `common.sh` and calls relevant functions.
 
