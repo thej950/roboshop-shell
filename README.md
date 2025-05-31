@@ -39,6 +39,7 @@ done
 ```
 - Iterates through a list of services.
 6. Special Variables | Below are pre-defined shell variables 
+
 | Variable | Meaning                     | Example Value           |
 | -------- | --------------------------- | ----------------------- |
 | `$0`     | Script name                 | `common.sh`             |
@@ -46,6 +47,7 @@ done
 | `$?`     | Exit status of last command | `0` or `1`              |
 | `$$`     | PID of the current shell    | `14123`                 |
 | `$USER`  | Current username            | `root`, `centos`        |
+
 ```bash
 echo "Script Name: $0"
 echo "Component: $1"
