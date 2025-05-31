@@ -2,6 +2,67 @@
 - common.sh file will containe **shared functions**
 - each microservice has its own shell script (like `user.sh`, `cart.sh`, etc.) that **sources** this `common.sh` and calls relevant functions.
 
+
+1. Variables uses 
+```bash
+color="\e[35m"
+```
+2. Functions - Reusable blocks of code. | Encapsulates logic (check status) to avoid code repetition.
+```
+stat_check() {
+  if [ $1 -eq 0 ]; then
+    echo SUCCESS
+  else
+    echo FAILURE
+    exit 1
+  fi
+}
+```
+3. Exit Status | Every command need sucess status 0 only if non-zero means failure then exit 
+```bash
+command &>>$log_file
+stat_check $?
+```
+4. Conditional Statements (if/else) | Control logic based on conditions.
+```bash
+if [ $user_id -ne 0 ]; then
+  echo Script should be running with sudo
+  exit 1
+fi
+```
+-  Check whether user is root. If not, stop the script.
+5. Loops (for, while, until) | Run commands repeatedly
+```bash
+for service in cart user payment; do
+  echo "Deploying $service..."
+done
+```
+- Iterates through a list of services.
+6. Special Variables | Below are pre-defined shell variables 
+| Variable | Meaning                     | Example Value           |
+| -------- | --------------------------- | ----------------------- |
+| `$0`     | Script name                 | `common.sh`             |
+| `$1..$n` | Positional arguments        | `cart`, `payment`, etc. |
+| `$?`     | Exit status of last command | `0` or `1`              |
+| `$$`     | PID of the current shell    | `14123`                 |
+| `$USER`  | Current username            | `root`, `centos`        |
+```bash
+echo "Script Name: $0"
+echo "Component: $1"
+```
+7. Logging | Storing output for review Later uses
+```bash
+command &>>$log_file
+```
+- Both stdout and stderr are written to the log file using &>>.
+8. Timestamps | Used for logging or performance tracking.
+```bash
+echo -e "[`date '+%Y-%m-%d %H:%M:%S'`] Starting..."
+```
+-  Adds current date & time to logs for traceability.
+
+
+
 ---
 
 ## OVERVIEW OF `common.sh`
